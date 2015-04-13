@@ -1,0 +1,78 @@
+<html>
+<head>
+  <!-- DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
+ 
+<!-- jQuery -->
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+ 
+<!-- DataTables -->
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>  
+
+    
+    
+</head>
+<body>
+  
+    
+    <table id="example" class="display" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Country Code</th>
+            <th>District</th>
+            <th>Population</th>
+            
+        </tr>
+    </thead>
+ 
+    <tbody>
+      <?php  
+        
+        $query= mysqli_query($conn,"SELECT * FROM employees");
+
+
+
+while($row= mysqli_fetch_array($query))
+
+{ 
+    
+ echo"<tr><td>" .$row['Sr. No.'] . "</td>" ."<td>" .$row['First Name'] . "</td>" . "<td>" .$row['last Name'] . "</td>" . "<td>" .$row['Age'] . "</td>" ."<td>" .$row['Gender'] . "</td> <td>" .$row['Address1'] ."</td><td>" . $row['Address2'] . "</td><td>" . $row['City'] . "</td><td>" . $row['State'] . "</td> <td>" . $row['Zip'] . "</td></tr>";
+    
+
+}
+
+        ?>
+    </tbody>
+</table>
+    <button>Print me</button>
+    <script>
+    $(document).ready(function() {
+    $('#example').DataTable( {
+        dom: 'T<"clear">lfrtip'
+    } );
+} );
+    
+        
+        function printData()
+{
+   var divToPrint=document.getElementById("example");
+   newWin= window.open("");
+   newWin.document.write(divToPrint.outerHTML);
+   newWin.print();
+   newWin.close();
+}
+
+$('button').on('click',function(){
+printData();
+})
+        
+        
+    
+    
+    
+    
+    </script>
+</body>
+</html>
